@@ -7,5 +7,5 @@ CREATE TABLE cake (
     image VARCHAR(255) NOT NULL,
     status ENUM('Active','Inactive') DEFAULT 'Active',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (category_id) REFERENCES category(id)
+    FOREIGN KEY (category_id) REFERENCES category(cid)
 );
