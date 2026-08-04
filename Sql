@@ -113,3 +113,14 @@ CREATE TABLE payment
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (user_id) REFERENCES registration(id)
 );
+
+
+CREATE TABLE feedback (
+    feedback_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    message TEXT NOT NULL,
+    feedback_date DATETIME NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES registration(id)
+);
