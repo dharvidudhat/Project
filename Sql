@@ -1,0 +1,100 @@
+CREATE DATABASE cakeshop;
+
+USE cakeshop;
+
+-- ===========================
+-- Registration Table
+-- ===========================
+
+CREATE TABLE registration (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    mobile VARCHAR(15) NOT NULL,
+    address TEXT NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT 'user'
+);
+
+
+
+-- ===========================
+-- Category Table
+-- ===========================
+
+CREATE TABLE category (
+    cid INT AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    status VARCHAR(20) NOT NULL
+);
+
+
+
+-- ===========================
+-- Cake Table
+-- ===========================
+
+CREATE TABLE cake (
+    cake_id INT AUTO_INCREMENT PRIMARY KEY,
+    category_id INT NOT NULL,
+    cake_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price DECIMAL(10,2) NOT NULL,
+    image VARCHAR(255),
+    status VARCHAR(20) NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES category(cid)
+);
+
+
+
+-- ===========================
+-- Cart Table
+-- ===========================
+
+CREATE TABLE cart (
+    cart_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    cake_id INT NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES registration(id),
+    FOREIGN KEY (cake_id) REFERENCES cake(cake_id)
+);
+
+
+
+-- ===========================
+-- Orders Table
+-- ===========================
+
+CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    mobile VARCHAR(15) NOT NULL,
+    address TEXT NOT NULL,
+    payment_method VARCHAR(50) NOT NULL,
+    total_amount DECIMAL(10,2) NOT NULL,
+    order_status VARCHAR(30) NOT NULL,
+    order_date DATETIME NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES registration(id)
+);
+
+
+
+-- ===========================
+-- Order Details Table
+-- ===========================
+
+CREATE TABLE order_details (
+    detail_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    cake_id INT NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (cake_id) REFERENCES cake(cake_id)
+);
