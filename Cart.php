@@ -65,7 +65,8 @@ if(isset($_POST['update']))
     "UPDATE cart
      SET quantity='$qty',
          subtotal='$subtotal'
-     WHERE cart_id='$cart_id'");
+     WHERE cart_id='$cart_id'
+     AND user_id='$user_id'
 
     header("Location: cart.php");
 }
@@ -276,7 +277,7 @@ else
 
     <h5>Your Cart is Empty!</h5>
 
-    <a href="home.php" class="btn btn-success mt-2">
+    <a href="index.php" class="btn btn-success mt-2">
         Continue Shopping
     </a>
 
