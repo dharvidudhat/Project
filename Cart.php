@@ -76,9 +76,7 @@ if(isset($_POST['update']))
 if(isset($_GET['delete']))
 {
     $cart_id = $_GET['delete'];
-
-    mysqli_query($conn,
-    "DELETE FROM cart WHERE cart_id='$cart_id'");
+  mysqli_query($conn,"DELETE FROM cartWHERE cart_id='$cart_id AND user_id='$user_id'");
 
     echo "<script>
     alert('Item Removed From Cart');
