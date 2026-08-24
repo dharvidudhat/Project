@@ -12,7 +12,7 @@ if(!isset($_SESSION['data']))
 // Cake ID Check
 if(!isset($_GET['id']))
 {
-    header("Location: home.php");
+    header("Location: index.php");
     exit();
 }
 
